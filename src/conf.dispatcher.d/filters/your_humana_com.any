@@ -1,0 +1,42 @@
+#
+# This file contains the filter ACL, and can be customized.
+#
+# By default, it includes the default filter ACL.
+#
+
+$include "./default_filters.any"
+
+##Deny everything and allow required paths
+/0101 { /type "deny"  /url "*" }
+
+##Allow content path
+/0102 { /type "allow" /method "GET" /url "/content/your-humana-com/*" }
+
+##Allow etc.clientlibs
+/0103 { /type "allow"  /url "/etc.clientlibs/*" }
+
+##Allow 
+/0104 { /type "allow"  /url "/content/dam/*" }
+
+
+# Allow components JSON model
+#/0105 { /type "allow" /extension "json" /selectors "model" /path "/content/*" }
+
+# Allow manifest.webmanifest files located in the content
+/0105 { /type "allow" /extension "webmanifest" /path "/content/*/manifest" }
+
+## For security
+/0106 { /type "deny" /suffix '(.*infinity.*|.*children.*|.*tidy.*)' } 
+
+##Avoid semicolon attack 
+/0107 { /type "deny" /url '.*/[.][.];/.*' } 
+
+#block access users
+/0108 { /type "deny" /url "GET /home/users/*.json" }  
+
+##Block json access for security
+/0109 { /type "deny" /method "GET" /extension '(json)' }
+
+##Allow csrf token
+/0110 { /type "allow" /method "GET" /url '/libs/granite/csrf/token.json' /extension 'json' }
+

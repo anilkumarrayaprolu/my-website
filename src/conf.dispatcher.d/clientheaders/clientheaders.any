@@ -1,0 +1,23 @@
+#
+# This file contains the request headers, and can be customized.
+#
+# By default, it includes the default client headers.
+#
+
+$include "./default_clientheaders.any"
+
+"authorization"
+"proxy-authorization"
+"proxy-connection"
+"cq-action"
+"cq-handle"
+"handle"
+"action"
+"cqstats"
+"dav"
+"ms-author-via"
+"x-destination"
+"x-depth"
+"x-overwrite"
+"If-Modified-Since"
+"Authorization"

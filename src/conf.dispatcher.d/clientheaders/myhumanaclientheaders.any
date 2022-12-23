@@ -1,0 +1,5 @@
+##Any My Humana specific clientheaders go here
+"Origin"
+"Access-Control-Allow-Origin"
+"Access-Control-Request-Method"
+"Access-Control-Request-Headers"

@@ -1,0 +1,38 @@
+#
+# This file contains the rewrite rules, and can be customized.
+#
+# By default, it includes just the rewrite rules. You can
+# add rewrite rules to this file but you should still include
+# the default rewrite rules.
+
+Include conf.d/rewrites/default_rewrite.rules
+
+
+RewriteCond %{REQUEST_METHOD} ^(TRACE) [NC]
+RewriteRule .* - [F]
+
+RewriteMap lowercase int:tolower
+RewriteCond $1 [A-Z]
+RewriteRule ^(.*)$ ${lowercase:$1} [R=301,L]
+
+#This ruleset would look for robots.txt and fetch it from the dam folder 
+
+RewriteRule ^/robots.txt$ /content/dam/sites/${CONTENT_FOLDER_MY_HUMANA_COM}/webserver/robots.txt [NC,PT,L]
+
+# rewrite for root redirect
+RewriteRule ^/?$ /content/${CONTENT_FOLDER_MY_HUMANA_COM}/us/en/home.html [PT,L]
+RewriteRule ^/content/${CONTENT_FOLDER_MY_HUMANA_COM}/(.*) http://%{SERVER_NAME}/$1 [R=301,NC,L]
+
+
+RewriteCond %{REQUEST_URI} !^/apps
+RewriteCond %{REQUEST_URI} !^/bin
+RewriteCond %{REQUEST_URI} !^/content
+RewriteCond %{REQUEST_URI} !^/etc
+RewriteCond %{REQUEST_URI} !^/home
+RewriteCond %{REQUEST_URI} !^/libs
+RewriteCond %{REQUEST_URI} !^/saml_login
+RewriteCond %{REQUEST_URI} !^/system
+RewriteCond %{REQUEST_URI} !^/tmp
+RewriteCond %{REQUEST_URI} !^/var
+RewriteCond %{REQUEST_URI} (.html|.jpe?g|.png|.jpg|.svg)$
+RewriteRule ^/(.*)$ /content/${CONTENT_FOLDER_MY_HUMANA_COM}/$1 [PT,L]
